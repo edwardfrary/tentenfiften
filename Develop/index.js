@@ -1,10 +1,10 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateReadme = require('./utils/generateMarkdown.js');
-const writeFile = require('./utils/generateMarkdown');
 
-const questions = readmeData => {
-    console.log(`=============================`);
+const writeFile = require('./utils/generateMarkdown.js');
+
+const questions = () => {
+    console.log("=============================");
 
     return inquirer
         .prompt([
@@ -38,7 +38,7 @@ const questions = readmeData => {
                 type: "input",
                 name: "gitName",
                 message: "Enter your GitHub Username. (Required)",
-                validate:gitNameInput => {
+                validate: gitNameInput => {
                     if (gitNameInput) {
                         return true;
                     } else {
@@ -46,7 +46,7 @@ const questions = readmeData => {
                         return false;
                     }
                 }
-            }
+            },
             {
                 type: "input",
                 name: "title",
@@ -91,7 +91,7 @@ const questions = readmeData => {
             {
                 type: "list",
                 name: "license",
-                choices:['MIT License', "Apache License 2.0", "BSD 3-Clause 'New' or 'Revised' license", "GNU General Public License (GPL)"]
+                choices: ['MIT License', "Apache License 2.0", "BSD 3-Clause 'New' or 'Revised' license", "GNU General Public License (GPL)"]
             },
             {
                 type: "input",
@@ -101,12 +101,11 @@ const questions = readmeData => {
         ])
 };
 
-// TODO: Create a function to write README file
-// function writeToFile(readme.md, data) { }
-// TODO: Create a function to initialize app
-// Function call to initialize app
 questions()
-.then(data => {
-    console.log("Readme Generated!")
-    return generateReadme(data);
-});
+    .then(readmeData => {
+        fs.writeFile("readme.md", readmeData, err=>{});
+        console.log("Readme Generated!");
+    })
+    .catch(err => {
+        console.log(err);
+    });
