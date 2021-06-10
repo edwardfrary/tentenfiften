@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateReadme = require('./utils/generateMarkdown.js');
 const writeFile = require('./utils/generateMarkdown');
 
 const questions = readmeData => {
@@ -70,11 +71,11 @@ const questions = readmeData => {
 };
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) { }
+// function writeToFile(readme.md, data) { }
 // TODO: Create a function to initialize app
 // Function call to initialize app
 questions()
 .then(data => {
     console.log("Readme Generated!")
-    return writeFile(data);
+    return generateReadme(data);
 });
