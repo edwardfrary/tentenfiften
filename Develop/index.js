@@ -23,6 +23,32 @@ const questions = readmeData => {
             },
             {
                 type: "input",
+                name: "email",
+                message: "Enter your email address. (Required)",
+                validate: emailInput => {
+                    if (emailInput) {
+                        return true;
+                    } else {
+                        console.log('Please enter your email.');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: "input",
+                name: "gitName",
+                message: "Enter your GitHub Username. (Required)",
+                validate:gitNameInput => {
+                    if (gitNameInput) {
+                        return true;
+                    } else {
+                        console.log('Please enter your GitHub Username.');
+                        return false;
+                    }
+                }
+            }
+            {
+                type: "input",
                 name: "title",
                 message: "Enter Project Title. (Required)",
                 validate: titleInput => {
@@ -61,6 +87,11 @@ const questions = readmeData => {
                 type: "input",
                 name: "distGuide",
                 message: "Distribution Guidelines:",
+            },
+            {
+                type: "list",
+                name: "license",
+                choices:['MIT License', "Apache License 2.0", "BSD 3-Clause 'New' or 'Revised' license", "GNU General Public License (GPL)"]
             },
             {
                 type: "input",
